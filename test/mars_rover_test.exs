@@ -72,9 +72,15 @@ defmodule MarsRoverTest do
     assert %MarsRover{x: 1, y: 2, face: "N"} = MarsRover.send_command(rover, "RR")
   end
 
-  test "send_command/2 move in y axis when the face is North" do
+  test "send_command/2 increase y axis when the face is North and the command is to Move" do
     rover = MarsRover.add_rover(1, 2, "N")
 
     assert %MarsRover{x: 1, y: 3, face: "N"} = MarsRover.send_command(rover, "M")
+  end
+
+  test "send_command/2 decrease y axis when the face is South and the command is to Move" do
+    rover = MarsRover.add_rover(1, 2, "S")
+
+    assert %MarsRover{x: 1, y: 1, face: "S"} = MarsRover.send_command(rover, "M")
   end
 end
