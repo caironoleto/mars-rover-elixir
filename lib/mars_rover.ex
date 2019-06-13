@@ -6,7 +6,7 @@ defmodule MarsRover do
   end
 
   def send_command(rover = %MarsRover{}, commands) do
-    commands = String.split(commands, ~r{b}, include_captures: true)
+    commands = String.graphemes(commands)
 
     do_send_command(rover, commands)
   end
