@@ -12,34 +12,43 @@ defmodule MarsRover do
   end
 
   defp do_send_command(rover = %MarsRover{}, []), do: rover
-  defp do_send_command(%MarsRover{x: x, y: y, face: face}, [command | next_commands]) when command == "L" do
-    rotate_left(face)
+
+  defp do_send_command(%MarsRover{x: x, y: y, face: face}, [command | next_commands])
+       when command == "L" do
+    face
+    |> rotate_left()
     |> build_rover(x, y)
     |> do_send_command(next_commands)
   end
 
-  defp do_send_command(%MarsRover{x: x, y: y, face: face}, [command | next_commands]) when command == "R" do
-    rotate_right(face)
+  defp do_send_command(%MarsRover{x: x, y: y, face: face}, [command | next_commands])
+       when command == "R" do
+    face
+    |> rotate_right()
     |> build_rover(x, y)
     |> do_send_command(next_commands)
   end
 
-  defp do_send_command(%MarsRover{x: x, y: y, face: "N"}, [command | next_commands]) when command == "M" do
+  defp do_send_command(%MarsRover{x: x, y: y, face: "N"}, [command | next_commands])
+       when command == "M" do
     build_rover("N", x, y + 1)
     |> do_send_command(next_commands)
   end
 
-  defp do_send_command(%MarsRover{x: x, y: y, face: "E"}, [command | next_commands]) when command == "M" do
+  defp do_send_command(%MarsRover{x: x, y: y, face: "E"}, [command | next_commands])
+       when command == "M" do
     build_rover("E", x + 1, y)
     |> do_send_command(next_commands)
   end
 
-  defp do_send_command(%MarsRover{x: x, y: y, face: "S"}, [command | next_commands]) when command == "M" do
+  defp do_send_command(%MarsRover{x: x, y: y, face: "S"}, [command | next_commands])
+       when command == "M" do
     build_rover("S", x, y - 1)
     |> do_send_command(next_commands)
   end
 
-  defp do_send_command(%MarsRover{x: x, y: y, face: "W"}, [command | next_commands]) when command == "M" do
+  defp do_send_command(%MarsRover{x: x, y: y, face: "W"}, [command | next_commands])
+       when command == "M" do
     build_rover("W", x - 1, y)
     |> do_send_command(next_commands)
   end
