@@ -95,4 +95,14 @@ defmodule MarsRoverTest do
 
     assert %MarsRover{x: 0, y: 2, face: "W"} = MarsRover.send_command(rover, "M")
   end
+
+  test "send_command/2 with a complex commands" do
+    rover = MarsRover.add_rover(1, 2, "N")
+
+    assert %MarsRover{x: 1, y: 3, face: "N"} = MarsRover.send_command(rover, "LMLMLMLMM")
+
+    rover = MarsRover.add_rover(3, 3, "E")
+
+    assert %MarsRover{x: 5, y: 1, face: "E"} = MarsRover.send_command(rover, "MMRMMRMRRM")
+  end
 end
