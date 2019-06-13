@@ -24,6 +24,11 @@ defmodule MarsRover do
     |> do_send_command(next_commands)
   end
 
+  defp do_send_command(%MarsRover{x: x, y: y, face: "N"}, [command | next_commands]) when command == "M" do
+    build_rover("N", x, y + 1)
+    |> do_send_command(next_commands)
+  end
+
   defp build_rover(face, x, y), do: %MarsRover{x: x, y: y, face: face}
   defp rotate_left(face) when face == "N", do: "W"
   defp rotate_left(face) when face == "W", do: "S"
