@@ -29,8 +29,18 @@ defmodule MarsRover do
     |> do_send_command(next_commands)
   end
 
+  defp do_send_command(%MarsRover{x: x, y: y, face: "E"}, [command | next_commands]) when command == "M" do
+    build_rover("E", x + 1, y)
+    |> do_send_command(next_commands)
+  end
+
   defp do_send_command(%MarsRover{x: x, y: y, face: "S"}, [command | next_commands]) when command == "M" do
     build_rover("S", x, y - 1)
+    |> do_send_command(next_commands)
+  end
+
+  defp do_send_command(%MarsRover{x: x, y: y, face: "W"}, [command | next_commands]) when command == "M" do
+    build_rover("W", x - 1, y)
     |> do_send_command(next_commands)
   end
 
